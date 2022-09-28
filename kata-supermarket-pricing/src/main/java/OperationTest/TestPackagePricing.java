@@ -13,22 +13,22 @@ public class TestPackagePricing {
     private PackagePricing aPackagePricing;
     
     @Test
-
     public void should_apply_reduction_when_package_number_needed_reached() {
         //given
     	Integer inputNumberToBuy=6;
     	
         //LinkedHashMap<Integer, Double>
-        LinkedHashMap<Integer, Double>  inputReduction =  new LinkedHashMap<Integer, Double>();
-        inputReduction.put(4, (double) 20);
+
         Item anItem = new Item("item", 14);
         aPackagePricing = new PackagePricing();
+        anItem.getReductionValueByNumber().put(4, (double) 20);
 
         //when
         double expectedPrice = aPackagePricing.calculatePrice(anItem, inputNumberToBuy);
 
         //then
-        assertEquals("44",expectedPrice);
+        assertEquals(48,expectedPrice,0.001);
+
     }
 
 }
