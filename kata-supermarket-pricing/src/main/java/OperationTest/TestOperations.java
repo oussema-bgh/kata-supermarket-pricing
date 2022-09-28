@@ -50,8 +50,8 @@ public class TestOperations {
         operation.addToCart(aChoc, 20 );
         operation.addToCart(aChoc, 20 );
         try {
-        operation.removeFromCart(aChoc, 60);
-        operation.removeFromCart(aChips, 10);
+        operation.removeFromCart(aChoc, 10);
+        operation.removeFromCart(aChips, 20);
 
         }catch(Exception e) {
             String expected = "Could not find the item";
