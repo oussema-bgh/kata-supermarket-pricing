@@ -7,7 +7,7 @@ public class Item {
 		private String name;
 	    private int unitaryPrice;
 	    
-	    private LinkedHashMap<Integer, Double> reductionValueByNumber = new LinkedHashMap<Integer, Double>();
+	    private LinkedHashMap<Integer, Double> reductionValueByNumber  ;
 		
 	    
 	    
@@ -15,6 +15,7 @@ public class Item {
 			super();
 			this.name = name;
 			this.unitaryPrice = unitaryPrice;
+			reductionValueByNumber = new LinkedHashMap<Integer, Double>();
 		}
 	    
 		public String getName() {
