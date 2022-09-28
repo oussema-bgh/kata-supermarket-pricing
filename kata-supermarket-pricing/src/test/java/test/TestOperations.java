@@ -1,4 +1,4 @@
-package OperationTest;
+package test;
 
 import static org.junit.Assert.assertEquals;
 
