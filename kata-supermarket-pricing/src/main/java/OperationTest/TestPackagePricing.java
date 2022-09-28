@@ -9,7 +9,7 @@ import org.junit.Test;
 import model.Item;
 import service.PackagePricing;
 
-public class PackagePricingTest {
+public class TestPackagePricing {
     private PackagePricing aPackagePricing;
     
     @Test

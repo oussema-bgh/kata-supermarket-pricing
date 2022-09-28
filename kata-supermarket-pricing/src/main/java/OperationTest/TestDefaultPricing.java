@@ -8,7 +8,7 @@ import model.Item;
 import service.DefaultPricing;
 import service.Pricing;
 
-public class TestPricing {
+public class TestDefaultPricing {
     private Pricing aDefaultPricing;
 
     @Test
@@ -22,7 +22,7 @@ public class TestPricing {
         aDefaultPricing.calculatePrice(anItem, valueToBuy);
 
         //then
-        assertEquals("10",aDefaultPricing.calculatePrice(anItem, valueToBuy));
+        assertEquals(10,aDefaultPricing.calculatePrice(anItem, valueToBuy),0.001);
 
     }
 }
