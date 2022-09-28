@@ -9,18 +9,15 @@ import service.DefaultPricing;
 import service.Pricing;
 
 public class TestDefaultPricing {
-    private Pricing aDefaultPricing;
+    private Pricing aDefaultPricing = new DefaultPricing();;
 
     @Test
     public void should_calculate_price() {
         //given
         Item anItem = new Item("potato", 5);
-        aDefaultPricing = new DefaultPricing();
         int valueToBuy = 2;
-
         //when
         aDefaultPricing.calculatePrice(anItem, valueToBuy);
-
         //then
         assertEquals(10,aDefaultPricing.calculatePrice(anItem, valueToBuy),0.001);
 
