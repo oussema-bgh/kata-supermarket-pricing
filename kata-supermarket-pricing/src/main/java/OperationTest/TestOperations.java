@@ -41,7 +41,7 @@ public class TestOperations {
     }
     
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void should_remove_from_cart_after_remove() {
     	aWater = new Item("water", 50);
         aChips = new Item("chips", 5);
@@ -51,9 +51,9 @@ public class TestOperations {
         operation.addToCart(aChoc, 20 );
         try {
         operation.removeFromCart(aChoc, 10);
-        operation.removeFromCart(aChips, 20);
+        assertEquals("30" , operation.returnCart().get(aChoc).toString());
 
-        }catch(Exception e) {
+        }catch(RuntimeException e) {
             String expected = "Could not find the item";
 
             assertEquals( expected, e.getMessage());

@@ -24,7 +24,7 @@ public class Operation implements IOperation {
 		}
 	}
 
-	public void removeFromCart(Item item, Integer numberToReturn)throws Exception {
+	public void removeFromCart(Item item, Integer numberToReturn)throws RuntimeException {
 		// TODO Auto-generated method stub
 		 if (returnCart.containsKey(item))
 	        {
