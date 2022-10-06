@@ -1,4 +1,4 @@
-package serviceImplimentation;
+package serviceimplimentation;
 
 import java.util.LinkedHashMap;
 
@@ -9,7 +9,7 @@ import service.SupermarketOperation;
 
 public class SupermarketOperationImpl implements SupermarketOperation {
 
-	private LinkedHashMap<Item, Offer> reductionValueByNumber = new LinkedHashMap<Item, Offer>();;
+	private LinkedHashMap<Item, Offer> reductionValueByNumber = new LinkedHashMap<>();
 
 	public LinkedHashMap<Item, Offer> getReductionValueByNumber() {
 		return reductionValueByNumber;
@@ -25,13 +25,10 @@ public class SupermarketOperationImpl implements SupermarketOperation {
 			return reductionValueByNumber.containsKey(item);
 		}
 		return false;
-		// boolean result = reductionValueByNumber.entrySet().stream().anyMatch(obj ->
-		// obj.getKey().equals(item));
-//		return result;
+
 	}
 
 	public double calculateBill(LinkedHashMap<Item, Float> items, LinkedHashMap<Item, Offer> lstOffer) {
-		// TODO Auto-generated method stub
 		Double bill = (double) 0;
 
 		bill = processDefaultPricing(items, lstOffer, bill);
@@ -56,20 +53,18 @@ public class SupermarketOperationImpl implements SupermarketOperation {
 	}
 
 	public void addReduction(Item item, Offer offer) throws DataException {
-		// TODO Auto-generated method stub
 		try {
 			checkItem(item);
 			checkOffer(offer);
 			reductionValueByNumber.put(item, offer);
 		} catch (DataException e) {
+			System.err.println(e.toString());
 			throw e ;
-			
 		}
 	}
 
 	public void removeReductions(Item item) {
-		// TODO Auto-generated method stub
-		if (!reductionValueByNumber.isEmpty() && itemPromotionCheck(item)) {
+		if (!reductionValueByNumber.isEmpty() && Boolean.TRUE.equals(itemPromotionCheck(item))) {
 			reductionValueByNumber.remove(item);
 		}
 
