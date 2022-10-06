@@ -1,10 +1,13 @@
 package service;
 
+import java.util.LinkedHashMap;
+
 import model.Item;
+import model.Offer;
 
-public abstract class Pricing {
+public interface Pricing {
+	public double calculatePrice(Item item, Float numberBought);
 
-	    public abstract double calculatePrice(Item item, Integer numberBought);
+	public double calculatePricePackage(LinkedHashMap<Item, Offer> lstOffer, Item item, Float numberBought);
 
-	}
-
+}
