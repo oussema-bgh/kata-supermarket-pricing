@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import model.Item;
-import serviceImplimentation.PricingImpl;
+import serviceimplimentation.PricingImpl;
 
 public class TestDefaultPricing {
 	private PricingImpl defaultPricing = new PricingImpl();;
 
 	@Test
-	public void should_calculate_price() {
+	 void should_calculate_price() {
 		// given
 		Item anItem = new Item("potato", 5,true);
 		float valueToBuy = 2;

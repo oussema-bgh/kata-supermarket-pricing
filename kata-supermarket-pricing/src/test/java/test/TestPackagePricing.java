@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import model.Item;
 import model.Offer;
-import serviceImplimentation.PricingImpl;
-import serviceImplimentation.SupermarketOperationImpl;
+import serviceimplimentation.PricingImpl;
+import serviceimplimentation.SupermarketOperationImpl;
 
 public class TestPackagePricing {
 	private PricingImpl packagePricing = new PricingImpl();;
 	private SupermarketOperationImpl superMarkt = new SupermarketOperationImpl();
 
 	@Test
-	public void should_apply_reduction_when_package_number_needed_reached() {
+	 void should_apply_reduction_when_package_number_needed_reached() {
 		// given
 		float inputNumberToBuy = 6;
 		// LinkedHashMap<Integer, Double>

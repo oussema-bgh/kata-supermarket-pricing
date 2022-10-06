@@ -1,7 +1,6 @@
 package service;
 
 import java.util.LinkedHashMap;
-import java.util.Optional;
 
 import Exceptions.DataException;
 import model.Item;

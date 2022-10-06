@@ -8,7 +8,7 @@ import Exceptions.DataException;
 import Exceptions.ItemNotFoundException;
 import Exceptions.QuantityNotAvailableException;
 import model.Item;
-import serviceImplimentation.OperationImpl;
+import serviceimplimentation.OperationImpl;
 
 public class TestOperations {
 
@@ -17,7 +17,7 @@ public class TestOperations {
 
 	
 	@Test
-	public void check_to_buy_half_item() throws DataException {
+	 void check_to_buy_half_item() throws DataException {
 		aChoc = new Item("water", 50,false);
 		try {
 			operation.addToCart(aChoc, (float) 20.5);
@@ -31,7 +31,7 @@ public class TestOperations {
 	
 	
 	@Test
-	public void should_add_to_cart_when_added() throws DataException {
+	 void should_add_to_cart_when_added() throws DataException {
 		// given
 		aWater = new Item("water", 50,false);
 		aChips = new Item("chips", 5,false);
@@ -45,7 +45,7 @@ public class TestOperations {
 	}
 
 	@Test
-	public void should_update_value_in_cart_when_added_twice() throws DataException {
+	 void should_update_value_in_cart_when_added_twice() throws DataException {
 		aWater = new Item("water", 50,false);
 		aChips = new Item("chips", 5,false);
 		aChoc = new Item("chocolate", 100,true);
@@ -58,7 +58,7 @@ public class TestOperations {
 	}
 
 	@Test
-	public void should_update_cart_after_remove() throws QuantityNotAvailableException, ItemNotFoundException, DataException {
+	 void should_update_cart_after_remove() throws QuantityNotAvailableException, ItemNotFoundException, DataException {
 		aWater = new Item("water", 50,false);
 		aChips = new Item("chips", 5,false);
 		aChoc = new Item("chocolate", 100,true);
@@ -72,7 +72,7 @@ public class TestOperations {
 	}
 
 	@Test
-	public void should_remove_from_cart_when_not_existe() throws ItemNotFoundException, QuantityNotAvailableException, DataException {
+	 void should_remove_from_cart_when_not_existe() throws ItemNotFoundException, QuantityNotAvailableException, DataException {
 		aWater = new Item("water", 50,false);
 		aChips = new Item("chips", 5,false);
 		aChoc = new Item("chocolate", 100,true);
@@ -90,7 +90,7 @@ public class TestOperations {
 	}
 
 	@Test
-	public void should_remove_from_cart_when_qte_not_existe()
+	 void should_remove_from_cart_when_qte_not_existe()
 			throws QuantityNotAvailableException, ItemNotFoundException, DataException {
 
 		aChoc = new Item("chocolate", 50,true);
@@ -108,7 +108,7 @@ public class TestOperations {
 	}
 
 	@Test
-	public void check_to_remove_half_item() throws DataException, QuantityNotAvailableException, ItemNotFoundException {
+	 void check_to_remove_half_item() throws DataException, QuantityNotAvailableException, ItemNotFoundException {
 		aChoc = new Item("water", 50,false);
 		try {
 			operation.addToCart(aChoc, (float) 20);
@@ -122,7 +122,7 @@ public class TestOperations {
 		}
 	}
 	@Test
-	public void should_remove_item_from_cart() throws QuantityNotAvailableException, ItemNotFoundException, DataException {
+	 void should_remove_item_from_cart() throws QuantityNotAvailableException, ItemNotFoundException, DataException {
 
 		aChoc = new Item("chocolate", 50,true);
 
@@ -132,7 +132,7 @@ public class TestOperations {
 	}
 
 	@Test
-	public void returnCart() throws DataException {
+	 void returnCart() throws DataException {
 
 		aWater = new Item("water", 50,false);
 		aChips = new Item("chips", 5,false);
@@ -148,14 +148,14 @@ public class TestOperations {
 	}
 
 	@Test
-	public void checkAfterEmptingTheCart() {
+	 void checkAfterEmptingTheCart() {
 		operation.emptyTheCart();
 		assertEquals("{}", operation.returnCart().toString());
 
 	}
 
 	@Test
-	public void removeItemFromCart() throws QuantityNotAvailableException, ItemNotFoundException, DataException {
+	 void removeItemFromCart() throws QuantityNotAvailableException, ItemNotFoundException, DataException {
 		aChoc = new Item("chocolate", 50,true);
 		operation.addToCart(aChoc, 20);
 		operation.removeFromCart(aChoc, 20);
