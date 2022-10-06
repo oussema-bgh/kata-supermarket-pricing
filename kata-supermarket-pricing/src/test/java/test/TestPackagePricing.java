@@ -1,29 +1,32 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.LinkedHashMap;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import model.Item;
-import service.PackagePricing;
+import model.Offer;
+import serviceImplimentation.PricingImpl;
+import serviceImplimentation.SupermarketOperationImpl;
 
 public class TestPackagePricing {
-    private PackagePricing aPackagePricing= new PackagePricing();;
-    
-    @Test
-    public void should_apply_reduction_when_package_number_needed_reached() {
-        //given
-    	Integer inputNumberToBuy=6;
-        //LinkedHashMap<Integer, Double>
-        Item anItem = new Item("item", 14);
-        anItem.getReductionValueByNumber().put(4, (double) 20);
-        //when
-        double expectedPrice = aPackagePricing.calculatePrice(anItem, inputNumberToBuy);
-        //then
-        assertEquals(48,expectedPrice,0.001);
+	private PricingImpl packagePricing = new PricingImpl();;
+	private SupermarketOperationImpl superMarkt = new SupermarketOperationImpl();
 
-    }
+	@Test
+	public void should_apply_reduction_when_package_number_needed_reached() {
+		// given
+		float inputNumberToBuy = 6;
+		// LinkedHashMap<Integer, Double>
+		Item item = new Item("apple", 14,true);
+		Offer offer = new Offer(4, 20);
+		superMarkt.getReductionValueByNumber().put(item, offer);
+		// when
+		double expectedPrice = packagePricing.calculatePricePackage(superMarkt.getReductionValueByNumber(), item,
+				inputNumberToBuy);
+		// then
+		assertEquals(48, expectedPrice, 0.001);
+
+	}
 
 }
