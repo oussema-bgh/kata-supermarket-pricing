@@ -1,6 +1,6 @@
 package serviceimplimentation;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 import model.Item;
 import model.Offer;
@@ -12,7 +12,7 @@ public class PricingImpl implements Pricing {
         return (item.getUnitaryPrice() * numberBought);
     }
 
-    public double calculatePricePackage(LinkedHashMap<Item, Offer> lstOffer, Item item, Float numberBought) {
+    public double calculatePricePackage(Map<Item, Offer> lstOffer, Item item, Float numberBought) {
 
         float numberForReduction = lstOffer.get(item).getQte();
         double reductionValue = lstOffer.get(item).getPrice();

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import model.Item;
 import serviceimplimentation.PricingImpl;
 
-public class TestDefaultPricing {
+class TestDefaultPricing {
     private PricingImpl defaultPricing = new PricingImpl();;
 
     @Test

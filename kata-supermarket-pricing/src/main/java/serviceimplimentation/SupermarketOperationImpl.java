@@ -1,6 +1,7 @@
 package serviceimplimentation;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import Exceptions.DataException;
 import model.Item;
@@ -11,12 +12,12 @@ public class SupermarketOperationImpl implements SupermarketOperation {
 
     private LinkedHashMap<Item, Offer> reductionValueByNumber = new LinkedHashMap<>();
 
-    public LinkedHashMap<Item, Offer> getReductionValueByNumber() {
+    public Map<Item, Offer> getReductionValueByNumber() {
         return reductionValueByNumber;
     }
 
-    public void setReductionValueByNumber(LinkedHashMap<Item, Offer> reductionValueByNumber) {
-        this.reductionValueByNumber = reductionValueByNumber;
+    public void setReductionValueByNumber(Map<Item, Offer> reductionValueByNumber) {
+        this.reductionValueByNumber = (LinkedHashMap<Item, Offer>) reductionValueByNumber;
     }
 
     public Boolean itemPromotionCheck(Item item) {
@@ -28,11 +29,11 @@ public class SupermarketOperationImpl implements SupermarketOperation {
 
     }
 
-    public double calculateBill(LinkedHashMap<Item, Float> items, LinkedHashMap<Item, Offer> lstOffer) {
+    public double calculateBill(Map<Item, Float> items, Map<Item, Offer> lstOffer) {
         Double bill = (double) 0;
 
-        bill = processDefaultPricing(items, lstOffer, bill);
-        bill = processPackagePricing(items, lstOffer, bill);
+        bill = processDefaultPricing((LinkedHashMap<Item, Float>) items, bill);
+        bill = processPackagePricing((LinkedHashMap<Item, Float>) items, (LinkedHashMap<Item, Offer>) lstOffer, bill);
 
         return bill;
     }
@@ -45,22 +46,16 @@ public class SupermarketOperationImpl implements SupermarketOperation {
                 .reduce(bill, (f1, f2) -> f1 + f2);
     }
 
-    private Double processDefaultPricing(LinkedHashMap<Item, Float> items, LinkedHashMap<Item, Offer> lstOffer,
-            Double bill) {
+    private Double processDefaultPricing(LinkedHashMap<Item, Float> items, Double bill) {
         return items.entrySet().stream().filter(item -> !itemPromotionCheck(item.getKey()))
                 .map(item -> new PricingImpl().calculatePrice(item.getKey(), item.getValue()))
                 .reduce(bill, (f1, f2) -> f1 + f2);
     }
 
     public void addReduction(Item item, Offer offer) throws DataException {
-        try {
-            checkItem(item);
-            checkOffer(offer);
-            reductionValueByNumber.put(item, offer);
-        } catch (DataException e) {
-            System.err.println(e.toString());
-            throw e;
-        }
+        checkItem(item);
+        checkOffer(offer);
+        reductionValueByNumber.put(item, offer);
     }
 
     public void removeReductions(Item item) {

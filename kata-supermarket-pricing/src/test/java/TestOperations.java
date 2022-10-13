@@ -1,6 +1,8 @@
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.LinkedHashMap;
+
 import org.junit.jupiter.api.Test;
 
 import Exceptions.DataException;
@@ -9,10 +11,15 @@ import Exceptions.QuantityNotAvailableException;
 import model.Item;
 import serviceimplimentation.OperationImpl;
 
-public class TestOperations {
+class TestOperations {
 
     OperationImpl operation = new OperationImpl();
     Item aChoc, aChips, aWater;
+
+    @Test
+    void checkReturnCart() {
+        assertEquals(new LinkedHashMap<Item, Float>(), operation.returnCart());
+    }
 
     @Test
     void check_to_buy_half_item() throws DataException {
@@ -128,6 +135,18 @@ public class TestOperations {
         operation.addToCart(aChoc, 1);
         operation.removeFromCart(aChoc, 1);
         assertEquals("{}", operation.returnCart().toString());
+    }
+
+    @Test
+    void should_remove_qte_of_item_from_cart()
+            throws QuantityNotAvailableException, ItemNotFoundException, DataException {
+
+        aChoc = new Item("chocolate", 50, true);
+
+        operation.addToCart(aChoc, 5);
+        operation.removeFromCart(aChoc, 1);
+        assertEquals("{" + aChoc.toString() + "=4.0}", operation.returnCart().toString());
+
     }
 
     @Test

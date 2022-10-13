@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import org.junit.jupiter.api.Test;
 
 import Exceptions.DataException;
@@ -12,12 +14,12 @@ import model.Offer;
 import serviceimplimentation.OperationImpl;
 import serviceimplimentation.SupermarketOperationImpl;
 
-public class TestSupermarketOperation {
+class TestSupermarketOperation {
     private SupermarketOperationImpl supermarket = new serviceimplimentation.SupermarketOperationImpl();
     private OperationImpl aCustomer = new OperationImpl();
 
     @Test
-    public void checkInsertingOffer() {
+    void checkInsertingOffer() {
         Item item = new Item("sweep", 50, false);
         Offer offer = new Offer(0, 10);
         try {
@@ -32,7 +34,7 @@ public class TestSupermarketOperation {
     }
 
     @Test
-    public void checkInsertingItem() {
+    void checkInsertingItem() {
         Item item = new Item("", 0, false);
         Offer offer = new Offer(5, 10);
         try {
@@ -44,7 +46,7 @@ public class TestSupermarketOperation {
     }
 
     @Test
-    public void checkReturnItem() {
+    void checkReturnItem() {
         Item item = new Item("chocolat", 10, false);
         Offer offer = new Offer(2, 10);
         LinkedHashMap<Item, Offer> reductionValueByNumberTest = new LinkedHashMap<>();
@@ -60,7 +62,7 @@ public class TestSupermarketOperation {
     }
 
     @Test
-    public void checkUpdatingItem() {
+    void checkUpdatingItem() {
         Item item = new Item("chocolat", 10, false);
         Offer offer = new Offer(2, 10);
         try {
@@ -78,7 +80,7 @@ public class TestSupermarketOperation {
     }
 
     @Test
-    public void checkUpdatingOffer() {
+    void checkUpdatingOffer() {
         Item item = new Item("chocolat", 10, true);
         Offer offer = new Offer(2, 10);
         try {
@@ -97,34 +99,34 @@ public class TestSupermarketOperation {
     }
 
     @Test
-    public void item_in_Promotion_Check() throws DataException {
+    void item_in_Promotion_Check() throws DataException {
         Item item = new Item("sweep", 50, true);
         Offer offer = new Offer(2, 10);
         supermarket.addReduction(item, offer);
-        assertEquals(supermarket.itemPromotionCheck(item), true);
+        assertEquals(Boolean.TRUE ,supermarket.itemPromotionCheck(item));
     }
 
     @Test
-    public void item_not_in_Promotion_Check() throws DataException {
+    void item_not_in_Promotion_Check() throws DataException {
         Item item = new Item("sweep", 50, true);
         Item aPotato = new Item("potato", 5, true);
 
         Offer offer = new Offer(2, 10);
         supermarket.addReduction(item, offer);
-        assertEquals(supermarket.itemPromotionCheck(aPotato), false);
+        assertEquals(Boolean.FALSE,supermarket.itemPromotionCheck(aPotato) );
     }
 
     @Test
-    public void noOfferFound() throws DataException {
+    void noOfferFound() throws DataException {
         Item aPotato = new Item("potato", 5, true);
-        assertEquals(supermarket.itemPromotionCheck(aPotato), false);
+        assertEquals(Boolean.FALSE,supermarket.itemPromotionCheck(aPotato) );
     }
 
     @Test
-    public void item_should_correctly_be_updated_when_reduction_set() throws DataException {
+    void item_should_correctly_be_updated_when_reduction_set() throws DataException {
         // given
 
-        Item item = new Item("sweep", 50, true);
+        Item item = new Item("sweep", 50, Boolean.TRUE);
         Offer offer = new Offer(2, 10);
 
         // when
@@ -132,12 +134,12 @@ public class TestSupermarketOperation {
         float numberForReductionn = supermarket.getReductionValueByNumber().get(item).getQte();
         Double reductionValuee = supermarket.getReductionValueByNumber().get(item).getPrice();
         // then
-        assertEquals(numberForReductionn, 2, 0.001);
-        assertEquals(reductionValuee, 10, 0.001);
+        assertEquals(2, numberForReductionn, 0.001);
+        assertEquals(10,reductionValuee, 0.001);
     }
 
     @Test
-    public void item_reduction_should_correctly_be_replaced_when_new_reduction_set() throws DataException {
+    void item_reduction_should_correctly_be_replaced_when_new_reduction_set() throws DataException {
         // given
         Item item = new Item("sweep", 50, true);
         Offer offer1 = new Offer(10, 10.5);
@@ -151,12 +153,52 @@ public class TestSupermarketOperation {
         float numberForReductionn = supermarket.getReductionValueByNumber().get(item).getQte();
         Double reductionValuee = supermarket.getReductionValueByNumber().get(item).getPrice();
         // then
-        assertEquals(numberForReductionn, 2, 0.001);
-        assertEquals(reductionValuee, 14, 0.001);
+        assertEquals(2, numberForReductionn, 0.001);
+        assertEquals(14, reductionValuee, 0.001);
     }
 
     @Test
-    public void item_should_correctly_be_updated_when_reduction_removed() throws DataException {
+    void item_should_correctly_not_be_updated() throws DataException {
+        // given
+        // LinkedHashMap<Integer, Double>
+        Item sweep = new Item("sweep", 50, true);
+
+        Item item = new Item("item", 14, false);
+        Offer offer = new Offer(4, 20);
+
+        supermarket.addReduction(item, offer);
+
+        // when
+        supermarket.removeReductions(sweep);
+
+        // using stream and lambda to search
+        Optional<Offer> offerSearched = supermarket.getReductionValueByNumber().entrySet().stream()
+                .filter(obj -> obj.getKey().equals(item)).map(Map.Entry::getValue).findFirst();
+
+        // then
+        assertEquals(Boolean.TRUE, offerSearched.isPresent());
+    }
+    
+    @Test
+    void item_should_not_be_updated() throws DataException {
+        // given
+        // LinkedHashMap<Integer, Double>
+        Item sweep = new Item("sweep", 50, true);
+
+        Item item = new Item("item", 14, false);
+
+        // when
+        supermarket.removeReductions(sweep);
+
+        // using stream and lambda to search
+        Optional<Offer> offerSearched = supermarket.getReductionValueByNumber().entrySet().stream()
+                .filter(obj -> obj.getKey().equals(item)).map(Map.Entry::getValue).findFirst();
+
+        // then
+        assertEquals(Boolean.FALSE, offerSearched.isPresent());
+    }
+    @Test
+    void item_should_correctly_be_updated_when_reduction_removed() throws DataException {
         // given
         // LinkedHashMap<Integer, Double>
         Item item = new Item("item", 14, false);
@@ -172,11 +214,11 @@ public class TestSupermarketOperation {
                 .filter(obj -> obj.getKey().equals(item)).map(Map.Entry::getValue).findFirst();
 
         // then
-        assertEquals(offerSearched.isPresent(), false);
+        assertEquals(Boolean.FALSE, offerSearched.isPresent());
     }
 
     @Test
-    public void price_should_be_correct_when_calculating_bill() throws DataException {
+    void price_should_be_correct_when_calculating_bill() throws DataException {
         // given
         Item aSweep = new Item("sweep", 50, true);
         Item aPotato = new Item("potato", 5, true);
@@ -191,7 +233,6 @@ public class TestSupermarketOperation {
         supermarket.addReduction(aSoap, offer);
 
         // then
-        assertEquals(supermarket.calculateBill(aCustomer.returnCart(), supermarket.getReductionValueByNumber()),
-                (260.0), 0.001);
+        assertEquals(260.0,supermarket.calculateBill(aCustomer.returnCart(), (LinkedHashMap<Item, Offer>) supermarket.getReductionValueByNumber()), 0.001);
     }
 }

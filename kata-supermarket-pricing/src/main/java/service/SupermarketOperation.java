@@ -1,6 +1,6 @@
 package service;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 import Exceptions.DataException;
 import model.Item;
@@ -10,7 +10,7 @@ public interface SupermarketOperation {
 
     public Boolean itemPromotionCheck(Item item);
 
-    public double calculateBill(LinkedHashMap<Item, Float> items, LinkedHashMap<Item, Offer> lstOffer);
+    public double calculateBill(Map<Item, Float> items, Map<Item, Offer> lstOffer);
 
     public void addReduction(Item item, Offer offer) throws DataException;
 
