@@ -1,4 +1,5 @@
-package test;
+
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,9 +12,9 @@ public class TestDefaultPricing {
 	private PricingImpl defaultPricing = new PricingImpl();;
 
 	@Test
-	 void should_calculate_price() {
+	void should_calculate_price() {
 		// given
-		Item anItem = new Item("potato", 5,true);
+		Item anItem = new Item("potato", 5, true);
 		float valueToBuy = 2;
 		// when
 		defaultPricing.calculatePrice(anItem, valueToBuy);

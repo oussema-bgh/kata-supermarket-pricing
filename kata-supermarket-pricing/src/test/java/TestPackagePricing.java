@@ -1,4 +1,5 @@
-package test;
+
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,11 +15,11 @@ public class TestPackagePricing {
 	private SupermarketOperationImpl superMarkt = new SupermarketOperationImpl();
 
 	@Test
-	 void should_apply_reduction_when_package_number_needed_reached() {
+	void should_apply_reduction_when_package_number_needed_reached() {
 		// given
 		float inputNumberToBuy = 6;
 		// LinkedHashMap<Integer, Double>
-		Item item = new Item("apple", 14,true);
+		Item item = new Item("apple", 14, true);
 		Offer offer = new Offer(4, 20);
 		superMarkt.getReductionValueByNumber().put(item, offer);
 		// when
