@@ -8,11 +8,11 @@ import model.Offer;
 
 public interface SupermarketOperation {
 
-	public Boolean itemPromotionCheck(Item item);
+    public Boolean itemPromotionCheck(Item item);
 
-	public double calculateBill(LinkedHashMap<Item, Float> items,LinkedHashMap<Item, Offer> lstOffer);
+    public double calculateBill(LinkedHashMap<Item, Float> items, LinkedHashMap<Item, Offer> lstOffer);
 
-	public void addReduction(Item item, Offer offer)  throws DataException;
+    public void addReduction(Item item, Offer offer) throws DataException;
 
-	public void removeReductions(Item item);
+    public void removeReductions(Item item);
 }

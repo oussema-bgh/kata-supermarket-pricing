@@ -1,37 +1,35 @@
 package model;
 
 public class Offer {
-	
-	private float qte;
-	private double price;
 
-	
-	
-	public Offer(float qte, double price) {
-		super();
-		this.qte = qte;
-		this.price = price;
-	}
+    private float qte;
+    private double price;
 
-	public float getQte() {
-		return qte;
-	}
+    public Offer(float qte, double price) {
+        super();
+        this.qte = qte;
+        this.price = price;
+    }
 
-	public void setQte(float qte) {
-		this.qte = qte;
-	}
+    public float getQte() {
+        return qte;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public void setQte(float qte) {
+        this.qte = qte;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	@Override
-	public String toString() {
-		return "Offer [qte=" + qte + ", price=" + price + "]";
-	}
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Offer [qte=" + qte + ", price=" + price + "]";
+    }
 
 }
