@@ -1,6 +1,6 @@
 package serviceimplimentation;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import Exceptions.DataException;
@@ -10,14 +10,14 @@ import service.SupermarketOperation;
 
 public class SupermarketOperationImpl implements SupermarketOperation {
 
-    private LinkedHashMap<Item, Offer> reductionValueByNumber = new LinkedHashMap<>();
+    private Map<Item, Offer> reductionValueByNumber = new HashMap<>();
 
     public Map<Item, Offer> getReductionValueByNumber() {
         return reductionValueByNumber;
     }
 
     public void setReductionValueByNumber(Map<Item, Offer> reductionValueByNumber) {
-        this.reductionValueByNumber = (LinkedHashMap<Item, Offer>) reductionValueByNumber;
+        this.reductionValueByNumber = reductionValueByNumber;
     }
 
     public Boolean itemPromotionCheck(Item item) {
@@ -32,13 +32,13 @@ public class SupermarketOperationImpl implements SupermarketOperation {
     public double calculateBill(Map<Item, Float> items, Map<Item, Offer> lstOffer) {
         Double bill = (double) 0;
 
-        bill = processDefaultPricing((LinkedHashMap<Item, Float>) items, bill);
-        bill = processPackagePricing((LinkedHashMap<Item, Float>) items, (LinkedHashMap<Item, Offer>) lstOffer, bill);
+        bill = processDefaultPricing( items, bill);
+        bill = processPackagePricing( items,  lstOffer, bill);
 
         return bill;
     }
 
-    private Double processPackagePricing(LinkedHashMap<Item, Float> items, LinkedHashMap<Item, Offer> lstOffer,
+    private Double processPackagePricing(Map<Item, Float> items, Map<Item, Offer> lstOffer,
             Double bill) {
 
         return items.entrySet().stream().filter(item -> itemPromotionCheck(item.getKey()))
@@ -46,7 +46,7 @@ public class SupermarketOperationImpl implements SupermarketOperation {
                 .reduce(bill, (f1, f2) -> f1 + f2);
     }
 
-    private Double processDefaultPricing(LinkedHashMap<Item, Float> items, Double bill) {
+    private Double processDefaultPricing(Map<Item, Float> items, Double bill) {
         return items.entrySet().stream().filter(item -> !itemPromotionCheck(item.getKey()))
                 .map(item -> new PricingImpl().calculatePrice(item.getKey(), item.getValue()))
                 .reduce(bill, (f1, f2) -> f1 + f2);

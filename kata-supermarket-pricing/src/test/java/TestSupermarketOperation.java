@@ -1,10 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +47,7 @@ class TestSupermarketOperation {
     void checkReturnItem() {
         Item item = new Item("chocolat", 10, false);
         Offer offer = new Offer(2, 10);
-        LinkedHashMap<Item, Offer> reductionValueByNumberTest = new LinkedHashMap<>();
+        Map<Item, Offer> reductionValueByNumberTest = new HashMap<>();
         try {
             supermarket.addReduction(item, offer);
             supermarket.getReductionValueByNumber().replace(item, offer);
@@ -160,7 +158,6 @@ class TestSupermarketOperation {
     @Test
     void item_should_correctly_not_be_updated() throws DataException {
         // given
-        // LinkedHashMap<Integer, Double>
         Item sweep = new Item("sweep", 50, true);
 
         Item item = new Item("item", 14, false);
@@ -233,6 +230,6 @@ class TestSupermarketOperation {
         supermarket.addReduction(aSoap, offer);
 
         // then
-        assertEquals(260.0,supermarket.calculateBill(aCustomer.returnCart(), (LinkedHashMap<Item, Offer>) supermarket.getReductionValueByNumber()), 0.001);
+        assertEquals(260.0,supermarket.calculateBill(aCustomer.returnCart(), (HashMap<Item, Offer>) supermarket.getReductionValueByNumber()), 0.001);
     }
 }

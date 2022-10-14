@@ -1,6 +1,7 @@
 package serviceimplimentation;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 import Exceptions.DataException;
 import Exceptions.ItemNotFoundException;
@@ -10,9 +11,9 @@ import service.Operation;
 
 public class OperationImpl implements Operation {
 
-    LinkedHashMap<Item, Float> returnCart = new LinkedHashMap<>();
+    Map<Item, Float> returnCart = new HashMap<>();
 
-    public LinkedHashMap<Item, Float> returnCart() {
+    public Map<Item, Float> returnCart() {
         return returnCart;
     }
 

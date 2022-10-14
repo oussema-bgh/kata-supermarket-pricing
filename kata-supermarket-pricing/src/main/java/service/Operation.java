@@ -1,6 +1,6 @@
 package service;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 import Exceptions.DataException;
 import Exceptions.ItemNotFoundException;
@@ -9,7 +9,7 @@ import model.Item;
 
 public interface Operation {
 
-    LinkedHashMap<Item, Float> returnCart();
+    Map<Item, Float> returnCart();
 
     void addToCart(Item item, float numberToBuy) throws DataException;
 

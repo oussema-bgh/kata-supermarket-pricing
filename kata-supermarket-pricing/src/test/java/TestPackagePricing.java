@@ -1,7 +1,7 @@
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +23,8 @@ class TestPackagePricing {
         Offer offer = new Offer(4, 20);
         superMarkt.getReductionValueByNumber().put(item, offer);
         // when
-        double expectedPrice = packagePricing.calculatePricePackage((LinkedHashMap<Item, Offer>) superMarkt.getReductionValueByNumber(), item,
-                inputNumberToBuy);
+        double expectedPrice = packagePricing.calculatePricePackage(
+                (HashMap<Item, Offer>) superMarkt.getReductionValueByNumber(), item, inputNumberToBuy);
         // then
         assertEquals(48, expectedPrice, 0.001);
 
